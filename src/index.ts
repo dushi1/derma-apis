@@ -13,8 +13,8 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD || "Tiger123@",
   database: process.env.DB_DATABASE || "test",
   synchronize: true,
-  logging: true,
   entities: [__dirname + "/entity/*.js"],
+  migrations: [__dirname + "/migrations/*.js"],
 });
 
 AppDataSource.initialize()
