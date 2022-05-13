@@ -206,7 +206,7 @@ export const RegisterData = {
     ],
     profession: {
       'Non-working': ['Student', 'Looking for a job', 'Not working', 'Retired'],
-      'IT/Computers& Software': [
+      'IT/Computers & Software': [
         'Software Professional',
         'Hardware & Networking professional',
         'Web / Graphic Designer',
@@ -507,3 +507,4 @@ export const RegisterData = {
       },
     ],
   };
+
