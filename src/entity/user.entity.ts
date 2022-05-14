@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-} from "typeorm";
+import { Column, Entity, OneToOne, JoinColumn } from "typeorm";
 import { DateTimeEntity } from "./base/dateTimeEntity";
 import { Drink } from "./drink.entity";
 import { Education } from "./education.entity";
@@ -16,11 +10,8 @@ import { Profession } from "./profession.entity";
 import { Religion } from "./religion.entity";
 import { Smoke } from "./smoke.entity";
 
-@Entity("user", { orderBy: { id: "ASC" } })
+@Entity("user")
 export class User extends DateTimeEntity {
-  @PrimaryGeneratedColumn({ type: "int" })
-  id: number;
-
   @Column({ unique: true })
   uid: number;
 
