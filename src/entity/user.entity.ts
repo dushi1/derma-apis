@@ -1,18 +1,9 @@
-import { Column, Entity, OneToOne, JoinColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn } from "typeorm";
 import { DateTimeEntity } from "./base/dateTimeEntity";
-import { Drink } from "./drink.entity";
-import { Education } from "./education.entity";
-import { Gender } from "./gender.entity";
-import { HighestEdu } from "./highestEdu.entity";
-import { Marital } from "./marital.entity";
-import { Privacy } from "./privacy.entity";
-import { Profession } from "./profession.entity";
-import { Religion } from "./religion.entity";
-import { Smoke } from "./smoke.entity";
 
 @Entity("user")
 export class User extends DateTimeEntity {
-  @Column({ unique: true })
+  @PrimaryColumn({ unique: true })
   uid: number;
 
   @Column()
@@ -33,42 +24,33 @@ export class User extends DateTimeEntity {
   @Column()
   dob: Date;
 
+  @Column()
+  privacy: string;
+
+  @Column()
+  religion: string;
+
+  @Column()
+  drink: string;
+
+  @Column()
+  education: string;
+
+  @Column()
+  gender: string;
+
+  @Column()
+  highestEdu: string;
+
+  @Column()
+  marital: string;
+
+  @Column()
+  profession: string;
+
+  @Column()
+  smoke: string;
+
   @Column({ default: true })
   isActive: boolean;
-
-  @OneToOne(() => Privacy)
-  @JoinColumn()
-  privacy: Privacy;
-
-  @OneToOne(() => Religion)
-  @JoinColumn()
-  religion: Religion;
-
-  @OneToOne(() => Drink)
-  @JoinColumn()
-  drink: Drink;
-
-  @OneToOne(() => Education)
-  @JoinColumn()
-  education: Education;
-
-  @OneToOne(() => Gender)
-  @JoinColumn()
-  gender: Gender;
-
-  @OneToOne(() => HighestEdu)
-  @JoinColumn()
-  highestEdu: HighestEdu;
-
-  @OneToOne(() => Marital)
-  @JoinColumn()
-  marital: Marital;
-
-  @OneToOne(() => Profession)
-  @JoinColumn()
-  profession: Profession;
-
-  @OneToOne(() => Smoke)
-  @JoinColumn()
-  smoke: Smoke;
 }

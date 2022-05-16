@@ -9,84 +9,14 @@ import { HighestEdu } from "./src/entity/highestEdu.entity";
 import { Marital } from "./src/entity/marital.entity";
 import { Children } from "./src/entity/children.entity";
 import { Diet } from "./src/entity/diet.entity";
-//github.com/dr5hn/countries-states-cities-database/tree/master/csv
+import { Gender } from "./src/entity/gender.entity";
+import { Privacy } from "./src/entity/privacy.entity";
+import { Religion } from "./src/entity/religion.entity";
+import { Skin } from "./src/entity/skin.entity";
+import { Smoke } from "./src/entity/smoke.entity";
+import { Interest } from "./src/entity/interest.entity";
+import { Profession } from "./src/entity/profession.entity";
 
-https: const children: object[] = [];
-const diet: object[] = [];
-const drink: object[] = [];
-const educationField: object[] = [];
-const highestEducation: object[] = [];
-const interest: object[] = [];
-const maritalStatus: object[] = [];
-const privacy: object[] = [];
-const profession: object[] = [];
-const religion: object[] = [];
-const skinDisease: object[] = [];
-const smokes: object[] = [];
-
-RegisterData.children.forEach((data) => {
-  children.push({
-    value: data.label,
-    label: data.value,
-  });
-});
-
-RegisterData.diet.forEach((data) => {
-  diet.push({
-    value: data.label,
-    label: data.value,
-  });
-});
-
-RegisterData.drink.forEach((data) => {
-  drink.push({
-    value: data.label,
-    label: data.value,
-  });
-});
-RegisterData.educationField.forEach((data) => {
-  educationField.push({
-    value: data.label,
-    label: data.value,
-  });
-});
-RegisterData.higestEducation.forEach((data) => {
-  highestEducation.push({
-    value: data.label,
-    label: data.value,
-  });
-});
-
-RegisterData.marital.forEach((data) => {
-  maritalStatus.push({
-    value: data.label,
-    label: data.value,
-  });
-});
-RegisterData.privacy.forEach((data) => {
-  privacy.push({
-    value: data.label,
-    label: data.value,
-  });
-});
-RegisterData.religion.forEach((data) => {
-  religion.push({
-    value: data.label,
-    label: data.value,
-  });
-});
-RegisterData.skin.forEach((data) => {
-  skinDisease.push({
-    value: data.label,
-    label: data.value,
-  });
-});
-RegisterData.smoke.forEach((data) => {
-  smokes.push({
-    value: data.label,
-    label: data.value,
-  });
-});
 
 const port = process.env.PORT || 5000;
 
@@ -103,33 +33,173 @@ export const AppDataSource = new DataSource({
 
 AppDataSource.initialize()
   .then(async () => {
+
+    const children: object[] = [];
+    const diet: object[] = [];
+    const drink: object[] = [];
+    const educationField: object[] = [];
+    const highestEducation: object[] = [];
+    const interests: object[] = [];
+    const maritalStatus: object[] = [];
+    const privacy: object[] = [];
+    const profession: object[] = [];
+    const religion: object[] = [];
+    const skinDisease: object[] = [];
+    const smokes: object[] = [];
+    const gender: object[] = [];
+
+
+
+    RegisterData.children.forEach((data) => {
+      children.push({
+        label: data.value,
+      });
+    });
+
+    RegisterData.diet.forEach((data) => {
+      diet.push({
+        label: data.value,
+      });
+    });
+
+    RegisterData.drink.forEach((data) => {
+      drink.push({
+        label: data.value,
+      });
+    });
+    RegisterData.educationField.forEach((data) => {
+      educationField.push({
+        label: data.value,
+      });
+    });
+    RegisterData.higestEducation.forEach((data) => {
+      highestEducation.push({
+        label: data.value,
+      });
+    });
+
+    RegisterData.marital.forEach((data) => {
+      maritalStatus.push({
+        label: data.value,
+      });
+    });
+    RegisterData.privacy.forEach((data) => {
+      privacy.push({
+        label: data.value,
+      });
+    });
+    RegisterData.religion.forEach((data) => {
+      religion.push({
+        label: data.value,
+      });
+    });
+    RegisterData.skin.forEach((data) => {
+      skinDisease.push({
+        label: data.value,
+      });
+    });
+    RegisterData.smoke.forEach((data) => {
+      smokes.push({
+        label: data.value,
+      });
+    });
+
+    RegisterData.interests.forEach((data) => {
+      interests.push({
+        label: data,
+      });
+    });
+
+    Object.keys(RegisterData.profession).forEach(data => {
+      //@ts-ignore
+      profession.push({ label: data, value: RegisterData.profession[data].toString() })
+    })
+
+    RegisterData.gender.forEach((data) => {
+      gender.push({
+        label: data.value,
+      });
+    });
+
+    await AppDataSource.createQueryBuilder()
+      .insert()
+      .into(Children)
+      .values(children)
+      .execute();
+
+    await AppDataSource.createQueryBuilder()
+      .insert()
+      .into(Diet)
+      .values(diet)
+      .execute();
+
     await AppDataSource.createQueryBuilder()
       .insert()
       .into(Drink)
-      .values([{ label: "" }])
+      .values(drink)
       .execute();
 
     await AppDataSource.createQueryBuilder()
       .insert()
       .into(Education)
-      .values([{ label: "" }])
+      .values(educationField)
       .execute();
 
     await AppDataSource.createQueryBuilder()
       .insert()
       .into(HighestEdu)
-      .values([{ label: "" }])
+      .values(highestEducation)
       .execute();
 
     await AppDataSource.createQueryBuilder()
       .insert()
       .into(Marital)
-      .values([{ label: "" }])
+      .values(maritalStatus)
       .execute();
 
-    process.exit(1);
-  })
-  .catch((error) => {
+    await AppDataSource.createQueryBuilder()
+      .insert()
+      .into(Privacy)
+      .values(privacy)
+      .execute();
+
+    await AppDataSource.createQueryBuilder()
+      .insert()
+      .into(Religion)
+      .values(religion)
+      .execute();
+
+    await AppDataSource.createQueryBuilder()
+      .insert()
+      .into(Skin)
+      .values(skinDisease)
+      .execute();
+
+    await AppDataSource.createQueryBuilder()
+      .insert()
+      .into(Smoke)
+      .values(smokes)
+      .execute();
+
+    await AppDataSource.createQueryBuilder()
+      .insert()
+      .into(Profession)
+      .values(profession)
+      .execute();
+
+    await AppDataSource.createQueryBuilder()
+      .insert()
+      .into(Interest)
+      .values(interests)
+      .execute();
+
+    await AppDataSource.createQueryBuilder()
+      .insert()
+      .into(Gender)
+      .values(gender)
+      .execute();
+
+  }).catch((error) => {
     console.log(error);
     logger.error(error);
     process.exit(1);

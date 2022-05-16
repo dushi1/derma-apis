@@ -7,5 +7,10 @@ export class Profession extends DateTimeEntity {
   id: number;
 
   @Column()
-  label: string;
+  label: string
+
+  @Column({ type: 'text' })
+  value: {
+    required: true
+  }
 }
