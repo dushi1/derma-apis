@@ -1,11 +1,11 @@
-const base = "/api";
+const base1 = "/api/v1";
 
 export default {
   url: {
-    base,
+    base1,
   },
   authorizationIgnorePath: [
-    `${base}/user/auth/login`,
-    `${base}/user/auth/register`,
+    `${base1}/user/auth/login`,
+    `${base1}/user/auth/register`,
   ],
 };

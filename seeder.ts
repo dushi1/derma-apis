@@ -34,80 +34,67 @@ export const AppDataSource = new DataSource({
 AppDataSource.initialize()
   .then(async () => {
 
-    const children: object[] = [];
-    const diet: object[] = [];
-    const drink: object[] = [];
-    const educationField: object[] = [];
-    const highestEducation: object[] = [];
-    const interests: object[] = [];
-    const maritalStatus: object[] = [];
-    const privacy: object[] = [];
     const profession: object[] = [];
-    const religion: object[] = [];
-    const skinDisease: object[] = [];
-    const smokes: object[] = [];
-    const gender: object[] = [];
 
-
-
-    RegisterData.children.forEach((data) => {
-      children.push({
-        label: data.value,
-      });
+    const children = RegisterData.children.map((data) => {
+      return { label: data.value }
     });
 
-    RegisterData.diet.forEach((data) => {
-      diet.push({
-        label: data.value,
-      });
+    const diet = RegisterData.diet.map((data) => {
+      return { label: data.value }
     });
 
-    RegisterData.drink.forEach((data) => {
-      drink.push({
+    const drink = RegisterData.drink.map((data) => {
+      return {
         label: data.value,
-      });
-    });
-    RegisterData.educationField.forEach((data) => {
-      educationField.push({
-        label: data.value,
-      });
-    });
-    RegisterData.higestEducation.forEach((data) => {
-      highestEducation.push({
-        label: data.value,
-      });
+      }
     });
 
-    RegisterData.marital.forEach((data) => {
-      maritalStatus.push({
+    const educationField = RegisterData.educationField.map((data) => {
+      return {
         label: data.value,
-      });
-    });
-    RegisterData.privacy.forEach((data) => {
-      privacy.push({
-        label: data.value,
-      });
-    });
-    RegisterData.religion.forEach((data) => {
-      religion.push({
-        label: data.value,
-      });
-    });
-    RegisterData.skin.forEach((data) => {
-      skinDisease.push({
-        label: data.value,
-      });
-    });
-    RegisterData.smoke.forEach((data) => {
-      smokes.push({
-        label: data.value,
-      });
+      }
     });
 
-    RegisterData.interests.forEach((data) => {
-      interests.push({
+    const highestEducation = RegisterData.higestEducation.map((data) => {
+      return {
+        label: data.value,
+      }
+    });
+
+    const maritalStatus = RegisterData.marital.map((data) => {
+      return {
+        label: data.value,
+      }
+    });
+
+    const privacy = RegisterData.privacy.map((data) => {
+      return {
+        label: data.value,
+      }
+    });
+    const religion = RegisterData.religion.map((data) => {
+      return {
+        label: data.value,
+      }
+    });
+
+    const skinDisease = RegisterData.skin.map((data) => {
+      return {
+        label: data.value
+      }
+    })
+
+    const smokes = RegisterData.smoke.map((data) => {
+      return {
+        label: data.value,
+      }
+    });
+
+    const interests = RegisterData.interests.map((data) => {
+      return {
         label: data,
-      });
+      }
     });
 
     Object.keys(RegisterData.profession).forEach(data => {
@@ -115,10 +102,10 @@ AppDataSource.initialize()
       profession.push({ label: data, value: RegisterData.profession[data].toString() })
     })
 
-    RegisterData.gender.forEach((data) => {
-      gender.push({
+    const gender = RegisterData.gender.map((data) => {
+      return {
         label: data.value,
-      });
+      }
     });
 
     await AppDataSource.createQueryBuilder()
