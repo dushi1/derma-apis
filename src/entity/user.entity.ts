@@ -4,52 +4,58 @@ import { DateTimeEntity } from "./base/dateTimeEntity";
 @Entity("user")
 export class User extends DateTimeEntity {
   @PrimaryColumn({ unique: true })
-  uid: number;
+  uid: string;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   fbUrl: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   number: string;
 
-  @Column()
+  @Column({ default: false })
   numberVerified: boolean;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   dob: Date;
 
-  @Column()
+  @Column({ nullable: true })
   privacy: string;
 
-  @Column()
+  @Column({ nullable: true })
   religion: string;
 
-  @Column()
+  @Column({ nullable: true })
   drink: string;
 
-  @Column()
+  @Column({ nullable: true })
   education: string;
 
-  @Column()
+  @Column({ nullable: true })
   gender: string;
 
-  @Column()
+  @Column({ nullable: true })
   highestEdu: string;
 
-  @Column()
+  @Column({ nullable: true })
   marital: string;
 
-  @Column()
+  @Column({ nullable: true })
   profession: string;
 
-  @Column()
+  @Column({ nullable: true })
   smoke: string;
+
+  @Column({ default: false })
+  firstForm: boolean;
+
+  @Column({ default: false })
+  secondForm: boolean;
 
   @Column({ default: true })
   isActive: boolean;

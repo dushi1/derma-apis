@@ -5,7 +5,8 @@ export default {
     base1,
   },
   authorizationIgnorePath: [
-    `${base1}/user/auth/login`,
-    `${base1}/user/auth/register`,
+    `${base1}/login`,
+    `${base1}/masterdata`,
   ],
+  timers: '100d'
 };

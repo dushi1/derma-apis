@@ -186,6 +186,8 @@ AppDataSource.initialize()
       .values(gender)
       .execute();
 
+  }).then(() => {
+    process.exit(1)
   }).catch((error) => {
     console.log(error);
     logger.error(error);

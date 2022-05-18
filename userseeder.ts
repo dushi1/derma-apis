@@ -23,7 +23,6 @@ export const AppDataSource = new DataSource({
 AppDataSource.initialize()
     .then(async () => {
 
-
         const countrystate = country.countries.map((data) => {
             return { country: data.country, state: data.states.toString() }
         })
@@ -38,7 +37,7 @@ AppDataSource.initialize()
             .into(CountryState)
             .values(countrystate)
             .execute().then(() => {
-                console.log('Countries upload completed');
+                console.log('Countries state upload completed');
             });
 
         await AppDataSource.createQueryBuilder()
@@ -46,11 +45,12 @@ AppDataSource.initialize()
             .into(StateCity)
             .values(statecity)
             .execute().then(() => {
-                console.log('Countries upload completed');
+                console.log('State cities upload completed');
             });
 
+    }).then(() => {
+        process.exit(1)
     }).catch((error) => {
-        console.log(error);
         logger.error(error);
-        process.exit(1);
+        process.exit(2);
     });
