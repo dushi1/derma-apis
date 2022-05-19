@@ -1,9 +1,17 @@
 import express from "express";
 
-import { RegisterRouteController } from "../../controllers/register.controller";
+import {
+    RegisterFirstFormController,
+    RegisterSecondFormController
+} from "../../controllers/register.controller";
+import {
+    registerSchemaSecondForm, regiterSchemaFirstForm,
+    validateLoginFirstForm, validateLoginSecondForm
+} from './validation.register'
 
 const router = express.Router();
 
-router.post("/", RegisterRouteController);
+router.post("/first", regiterSchemaFirstForm, validateLoginFirstForm, RegisterFirstFormController);
+router.post("/second", registerSchemaSecondForm, validateLoginSecondForm, RegisterSecondFormController);
 
 export default router;

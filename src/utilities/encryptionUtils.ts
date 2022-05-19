@@ -9,9 +9,10 @@ const verifyUid = async (token: string): Promise<any> =>
     new Promise(resolve => {
         jwt.verify(
             token,
-            process.env.authSecret || 'secret',
+            process.env.JWTSECRET || 'secret',
             (err, decoded) => {
                 if (err) {
+                    console.log(err);
                     resolve(null);
                 } else {
                     resolve(decoded);

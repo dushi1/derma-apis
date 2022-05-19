@@ -15,9 +15,6 @@ export class User extends DateTimeEntity {
   @Column({ unique: true, nullable: true })
   number: string;
 
-  @Column({ default: false })
-  numberVerified: boolean;
-
   @Column({ unique: true, nullable: true })
   email: string;
 
@@ -25,10 +22,25 @@ export class User extends DateTimeEntity {
   dob: Date;
 
   @Column({ nullable: true })
+  age: number;
+
+  @Column({ nullable: true })
+  skin: string;
+
+  @Column({ nullable: true })
   privacy: string;
+
+  @Column({ type: 'text', nullable: true })
+  interest: string;
 
   @Column({ nullable: true })
   religion: string;
+
+  @Column({ nullable: true })
+  children: string;
+
+  @Column({ nullable: true })
+  diet: string;
 
   @Column({ nullable: true })
   drink: string;
@@ -50,6 +62,15 @@ export class User extends DateTimeEntity {
 
   @Column({ nullable: true })
   smoke: string;
+
+  @Column({ nullable: true })
+  country: string;
+
+  @Column({ nullable: true })
+  state: string;
+
+  @Column({ nullable: true })
+  city: string;
 
   @Column({ default: false })
   firstForm: boolean;

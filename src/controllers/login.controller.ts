@@ -16,7 +16,7 @@ const LoginRouteController = async (req: Request, res: Response) => {
             .createQueryBuilder()
             .insert()
             .into(User)
-            .values({ uid: req.body.uid })
+            .values({ uid: req.body.uid, number: req.body.mobile === '' ? null : req.body.mobile })
             .execute()
         res.json({
             token: signUid(req.body.uid),

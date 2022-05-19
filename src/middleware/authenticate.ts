@@ -1,4 +1,6 @@
 import express from "express";
+import HttpStatus from "http-status-codes";
+import { verifyUid } from "../utilities/encryptionUtils";
 import application from "../constants/application";
 import IRequest from "../types/IRequest";
 
@@ -21,11 +23,15 @@ export default async (
     application.authorizationIgnorePath.indexOf(`${req.originalUrl}`) === -1
   ) {
     if (req.headers.authorization) {
-
+      const token = await verifyUid(req.headers.authorization.split(' ')[1])
+      //@ts-ignore
+      req.uid = token.uid
     }
-    // if (req.headers.authorization) {
-    //   return req.headers.authorization;
-    // }
+    else {
+      res.status(HttpStatus.FORBIDDEN).json({
+        status: HttpStatus.getStatusText(HttpStatus.FORBIDDEN)
+      })
+    }
   }
   next();
 };
