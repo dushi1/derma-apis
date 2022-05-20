@@ -8,7 +8,7 @@ import IRequest from "../types/IRequest";
  * Route authentication middleware to verify a token
  *
  * @param {object} req
- * @param {object} _res
+ * @param {object} res
  * @param {function} next
  *
  */
@@ -24,8 +24,13 @@ export default async (
   ) {
     if (req.headers.authorization) {
       const token = await verifyUid(req.headers.authorization.split(' ')[1])
-      //@ts-ignore
-      req.uid = token.uid
+      if (token) {
+        req.uid = token.uid
+      } else {
+        res.status(HttpStatus.UNAUTHORIZED).json({
+          status: HttpStatus.getStatusText(HttpStatus.UNAUTHORIZED)
+        })
+      }
     }
     else {
       res.status(HttpStatus.FORBIDDEN).json({
