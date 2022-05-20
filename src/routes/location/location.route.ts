@@ -9,7 +9,7 @@ import {
 const router = express.Router();
 
 router.get("/country", CountryRouteController);
-router.get("/state", StateRouteController);
-router.get("/city", CityRouteController);
+router.get("/state/:country", StateRouteController);
+router.get("/city/:state", CityRouteController);
 
 export default router;

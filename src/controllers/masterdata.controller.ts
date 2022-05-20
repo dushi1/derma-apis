@@ -1,4 +1,4 @@
-import { AppDataSource } from "../index";
+// import { AppDataSource } from "../index";
 import { Request, Response } from "express";
 import { Drink } from "../entity/drink.entity";
 import { Education } from "../entity/education.entity";
@@ -13,10 +13,11 @@ import { Skin } from "../entity/skin.entity";
 import { Smoke } from "../entity/smoke.entity";
 import { Interest } from "../entity/interest.entity";
 import { Profession } from "../entity/profession.entity";
+import { getConnection } from "typeorm";
 
 
 const MasterDataRouteController = async (req: Request, res: Response) => {
-    const drink = await AppDataSource
+    const drink = await getConnection()
         .getRepository(Drink)
         .createQueryBuilder("drink")
         .getMany()
@@ -24,7 +25,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return { value: data.label, label: data.label }
     })
 
-    const education = await AppDataSource
+    const education = await getConnection()
         .getRepository(Education)
         .createQueryBuilder("education")
         .getMany()
@@ -32,7 +33,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return { value: data.label, label: data.label }
     })
 
-    const highestEducation = await AppDataSource
+    const highestEducation = await getConnection()
         .getRepository(HighestEdu)
         .createQueryBuilder("highestEdu")
         .getMany()
@@ -40,7 +41,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return { value: data.label, label: data.label }
     })
 
-    const maritalStatus = await AppDataSource
+    const maritalStatus = await getConnection()
         .getRepository(Marital)
         .createQueryBuilder("marital")
         .getMany()
@@ -48,7 +49,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return { value: data.label, label: data.label }
     })
 
-    const children = await AppDataSource
+    const children = await getConnection()
         .getRepository(Children)
         .createQueryBuilder("children")
         .getMany()
@@ -56,7 +57,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return { value: data.label, label: data.label }
     })
 
-    const diet = await AppDataSource
+    const diet = await getConnection()
         .getRepository(Diet)
         .createQueryBuilder("diet")
         .getMany()
@@ -64,7 +65,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return { value: data.label, label: data.label }
     })
 
-    const gender = await AppDataSource
+    const gender = await getConnection()
         .getRepository(Gender)
         .createQueryBuilder("gender")
         .getMany()
@@ -72,7 +73,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return { value: data.label, label: data.label }
     })
 
-    const privacy = await AppDataSource
+    const privacy = await getConnection()
         .getRepository(Privacy)
         .createQueryBuilder("privacy")
         .getMany()
@@ -80,7 +81,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return { value: data.label, label: data.label }
     })
 
-    const religion = await AppDataSource
+    const religion = await getConnection()
         .getRepository(Religion)
         .createQueryBuilder("religion")
         .getMany()
@@ -88,7 +89,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return { value: data.label, label: data.label }
     })
 
-    const skin = await AppDataSource
+    const skin = await getConnection()
         .getRepository(Skin)
         .createQueryBuilder("skin")
         .getMany()
@@ -96,7 +97,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return { value: data.label, label: data.label }
     })
 
-    const smoke = await AppDataSource
+    const smoke = await getConnection()
         .getRepository(Smoke)
         .createQueryBuilder("smoke")
         .getMany()
@@ -104,7 +105,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return { value: data.label, label: data.label }
     })
 
-    const interest = await AppDataSource
+    const interest = await getConnection()
         .getRepository(Interest)
         .createQueryBuilder("interest")
         .getMany()
@@ -112,7 +113,7 @@ const MasterDataRouteController = async (req: Request, res: Response) => {
         return data.label
     })
 
-    const profession = await AppDataSource
+    const profession = await getConnection()
         .getRepository(Profession)
         .createQueryBuilder("profession")
         .getMany()

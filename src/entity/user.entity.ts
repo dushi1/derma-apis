@@ -19,7 +19,7 @@ export class User extends DateTimeEntity {
   email: string;
 
   @Column({ nullable: true })
-  dob: Date;
+  dob: string;
 
   @Column({ nullable: true })
   age: number;

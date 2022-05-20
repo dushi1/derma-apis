@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
-import { AppDataSource } from "../index";
+// import { AppDataSource } from "../index";
 import { User } from "../entity/user.entity";
 import HttpStatus from 'http-status-codes'
+import { getConnection } from "typeorm";
 
 
 const RegisterFirstFormController = async (req: Request, res: Response) => {
@@ -17,7 +18,7 @@ const RegisterFirstFormController = async (req: Request, res: Response) => {
     //     return age
     // }
     // const age = ageCalc(req.body.age)
-    const updatedUser = await AppDataSource
+    const updatedUser = await getConnection()
         .createQueryBuilder()
         .update(User)
         .set({
@@ -44,7 +45,7 @@ const RegisterFirstFormController = async (req: Request, res: Response) => {
 };
 
 const RegisterSecondFormController = async (req: Request, res: Response) => {
-    const updatedUser = await AppDataSource
+    const updatedUser = await getConnection()
         .createQueryBuilder()
         .update(User)
         .set({
