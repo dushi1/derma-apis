@@ -2,6 +2,11 @@ import "reflect-metadata";
 import logger from "./src/config/logger";
 import { createConnection, getConnection } from "typeorm";
 import { RegisterData } from "./data";
+import country from "./dermacountries.json";
+import cities from "./dermacities.json";
+import users from "./dermaoldusers.json";
+import { CountryState } from "./src/entity/countrystate.entity";
+import { StateCity } from "./src/entity/statecity.entity";
 
 import { Drink } from "./src/entity/drink.entity";
 import { Education } from "./src/entity/education.entity";
@@ -117,6 +122,31 @@ createConnection({
         }
     });
 
+    const countrystate = country.countries.map((data) => {
+        return { country: data.country, state: data.states.toString() }
+    })
+
+    const statecity = cities.map((data) => {
+        return { city: data.city, state: data.state }
+    })
+
+
+    await getConnection().createQueryBuilder()
+        .insert()
+        .into(CountryState)
+        .values(countrystate)
+        .execute().then(() => {
+            console.log('Countries state upload completed');
+        });
+
+    await getConnection().createQueryBuilder()
+        .insert()
+        .into(StateCity)
+        .values(statecity)
+        .execute().then(() => {
+            console.log('State cities upload completed');
+        });
+
     await getConnection().createQueryBuilder()
         .insert()
         .into(Children)
@@ -194,6 +224,7 @@ createConnection({
         .into(Gender)
         .values(gender)
         .execute();
+
 
 }).then(() => {
     process.exit(1)
