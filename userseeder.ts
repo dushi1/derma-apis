@@ -37,9 +37,9 @@ createConnection({
         return { country: data.country, state: data.states.toString() }
     })
 
-    const statecity = cities.map((data) => {
-        return { city: data.city, state: data.state }
-    })
+    // const statecity = cities.map((data) => {
+    //     return { city: data.city, state: data.state }
+    // })
 
 
     await getConnection().createQueryBuilder()
@@ -50,13 +50,13 @@ createConnection({
             console.log('Countries state upload completed');
         });
 
-    await getConnection().createQueryBuilder()
-        .insert()
-        .into(StateCity)
-        .values(statecity)
-        .execute().then(() => {
-            console.log('State cities upload completed');
-        });
+    // await getConnection().createQueryBuilder()
+    //     .insert()
+    //     .into(StateCity)
+    //     .values(statecity)
+    //     .execute().then(() => {
+    //         console.log('State cities upload completed');
+    //     });
 
 }).then(() => {
     process.exit(1)
