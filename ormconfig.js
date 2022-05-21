@@ -6,10 +6,10 @@ module.exports = {
     "database": process.env.DB_DATABASE || "test",
     "charset": "utf8",
     "synchronize": true,
-    "logging": true,
+    "logging": false,
     "entities": [
-        // "**/**.entity.ts",
-        "**/**.entity.js"
+        "**/**.entity.ts",
+        // "**/**.entity.js"
     ],
     "migrations": [
         "**/**.migrations.ts"

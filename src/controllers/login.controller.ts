@@ -11,29 +11,31 @@ const LoginRouteController = async (req: Request, res: Response) => {
         .where("user.uid = :id", { id: req.body.uid })
         .getOne()
 
-    console.log(findUser);
-
+    const mobile = req.body.mobile ? req.body.mobile : null
 
     if (!findUser) {
         const registeredUser = await getConnection()
             .createQueryBuilder()
             .insert()
             .into(User)
-            .values({ uid: req.body.uid, number: req.body.mobile === '' ? null : req.body.mobile })
+            .values({ number: mobile, uid: req.body.uid })
             .execute()
+
+        const user = await getConnection()
+            .getRepository(User)
+            .createQueryBuilder("user")
+            .where("user.uid = :id", { id: req.body.uid })
+            .getOne()
+
         res.json({
             token: signUid(req.body.uid),
-            user: registeredUser.generatedMaps,
-            isFirstFormComplete: false,
-            isSecondFormComplete: false,
+            user: user,
             newRegisteration: true
         })
     } else {
         res.json({
             token: signUid(req.body.uid),
             user: findUser,
-            isFirstFormComplete: findUser.firstForm,
-            isSecondFormComplete: findUser.secondForm,
             newRegisteration: false
         })
     }

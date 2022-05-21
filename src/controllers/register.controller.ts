@@ -64,10 +64,16 @@ const RegisterSecondFormController = async (req: Request, res: Response) => {
             message: 'Failed to update user',
         });
     } else {
+        const user = await getConnection()
+            .getRepository(User)
+            .createQueryBuilder("user")
+            //@ts-ignore
+            .where("user.uid = :id", { id: req.uid })
+            .getOne()
         res.status(HttpStatus.OK).send({
             status: 'Success',
             message: 'User updated',
-            user: updatedUser,
+            user: user,
         });
     }
 };

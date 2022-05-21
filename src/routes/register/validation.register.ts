@@ -1,11 +1,24 @@
 import { body, validationResult } from 'express-validator'
 import express from 'express'
+import { getConnection } from 'typeorm';
+import { User } from '../../entity/user.entity';
 
 const regiterSchemaFirstForm = [
     body('gender').not().isEmpty().withMessage('Gender is required.'),
     body('dob').not().isEmpty().withMessage('Date of birth is required.'),
     body('name').not().isEmpty().withMessage('Name is required.'),
-    body('email').not().isEmpty().withMessage('Email is required.'),
+    body('email').not().isEmpty().withMessage('Email is required.').custom(async (value) => {
+        if (value) {
+            const findMobile = await getConnection()
+                .getRepository(User)
+                .createQueryBuilder("user")
+                .where("user.email = :id", { id: value })
+                .getOne()
+            if (findMobile) {
+                throw new Error('Email id already in use.');
+            }
+        }
+    }),
     body('skin').not().isEmpty().withMessage('Skin condition is required.'),
     body('privacy').not().isEmpty().withMessage('Privacy is required.')
 ]
