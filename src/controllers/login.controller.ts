@@ -28,13 +28,13 @@ const LoginRouteController = async (req: Request, res: Response) => {
             .getOne()
 
         res.json({
-            token: signUid(req.body.uid),
+            token: `Bearer ${signUid(req.body.uid)}`,
             user: user,
             newRegisteration: true
         })
     } else {
         res.json({
-            token: signUid(req.body.uid),
+            token: `Bearer ${signUid(req.body.uid)}`,
             user: findUser,
             newRegisteration: false
         })
