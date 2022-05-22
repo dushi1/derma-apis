@@ -44,7 +44,7 @@ const LoginRouteController = async (req: Request, res: Response) => {
                     .getOne()
 
                 res.json({
-                    token: `Bearer ${signUid(req.body.uid)}`,
+                    token: signUid(req.body.uid),
                     user: user,
                     newRegisteration: true
                 })
@@ -64,14 +64,14 @@ const LoginRouteController = async (req: Request, res: Response) => {
                 .getOne()
 
             res.json({
-                token: `Bearer ${signUid(req.body.uid)}`,
+                token: signUid(req.body.uid),
                 user: user,
                 newRegisteration: true
             })
         }
     } else {
         res.json({
-            token: `Bearer ${signUid(req.body.uid)}`,
+            token: signUid(req.body.uid),
             user: findUser,
             newRegisteration: false
         })

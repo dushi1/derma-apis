@@ -3,9 +3,10 @@ import { Request, Response } from "express";
 import { User } from "../entity/user.entity";
 import HttpStatus from 'http-status-codes'
 import { getConnection } from "typeorm";
+import IRequest from "../types/IRequest";
 
 
-const RegisterFirstFormController = async (req: Request, res: Response) => {
+const RegisterFirstFormController = async (req: IRequest, res: Response) => {
     // console.log(req.body);
     // const ageCalc = (date: string) => {
     //     const today = new Date()
@@ -26,7 +27,6 @@ const RegisterFirstFormController = async (req: Request, res: Response) => {
             dob: req.body.dob, gender: req.body.gender,
             privacy: req.body.privacy, skin: req.body.privacy
         })
-        //@ts-ignore
         .where("uid = :uid", { uid: req.uid })
         .execute()
     if (updatedUser.affected === 0) {
@@ -35,16 +35,22 @@ const RegisterFirstFormController = async (req: Request, res: Response) => {
             message: 'Failed to update user',
         });
     } else {
+        const user = await getConnection()
+            .getRepository(User)
+            .createQueryBuilder("user")
+            //@ts-ignore
+            .where("user.uid = :id", { id: req.uid })
+            .getOne()
         res.status(HttpStatus.ACCEPTED).send({
             status: 'Success',
             message: 'User updated',
-            user: updatedUser,
+            user: user,
         });
     }
 
 };
 
-const RegisterSecondFormController = async (req: Request, res: Response) => {
+const RegisterSecondFormController = async (req: IRequest, res: Response) => {
     const updatedUser = await getConnection()
         .createQueryBuilder()
         .update(User)
